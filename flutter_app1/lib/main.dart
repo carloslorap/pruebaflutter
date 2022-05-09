@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/cancionesmodell.dart';
+import 'package:flutter_app1/reproductor.dart';
 
 void main() => runApp(const MyApp());
 
@@ -25,23 +27,24 @@ class MyStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
+        children: <Widget>[
           Stack(children: <Widget>[
             imagenfondo(context),
             customAppbar(),
             subtitulo(context),
           ]),
+
+          ///esto codigo
           Expanded(
-              child: ListView(
-            children: <Widget>[
-              itemaudio(),
-              itemaudio(),
-              itemaudio(),
-              itemaudio(),
-              itemaudio(),
-              itemaudio(),
-            ],
-          ))
+            child: ListView(
+              children: canciones
+                  .asMap()
+                  .map((index, cancion) =>
+                      MapEntry(index, itemaudio(context, cancion, index + 1)))
+                  .values
+                  .toList(),
+            ),
+          ),
         ],
       ),
     );
@@ -50,13 +53,15 @@ class MyStatelessWidget extends StatelessWidget {
 
 Widget imagenfondo(BuildContext context) {
   return Container(
-    height: MediaQuery.of(context).size.height / 1.8,
-    width: MediaQuery.of(context).size.width / 1,
-    child: Image.network(
-      "https://www.clipartkey.com/mpngs/m/276-2767912_music-maker-online-create-music-logo-png-hd.png",
-    ),
-  );
+      height: MediaQuery.of(context).size.height / 1.8,
+      width: MediaQuery.of(context).size.width / 1,
+      child: Image.network(
+          "https://www.clipartkey.com/mpngs/m/276-2767912_music-maker-online-create-music-logo-png-hd.png"));
 }
+
+// Image.network(
+//       "https://www.clipartkey.com/mpngs/m/276-2767912_music-maker-online-create-music-logo-png-hd.png",
+//     ),
 
 Widget customAppbar() {
   return Container(
@@ -105,35 +110,45 @@ Widget subtitulo(BuildContext context) {
       )));
 }
 
-Widget itemaudio() {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 10),
-    color: Colors.transparent,
-    height: 90,
-    child: Row(children: <Widget>[
-      Text('01', style: TextStyle(color: Colors.grey)),
-      SizedBox(
-        width: 20,
-      ),
-      Container(
-        height: 70,
-        width: 100,
-        child: Image.network(
-            "https://i.ytimg.com/vi/PIh2xe4jnpk/maxresdefault.jpg"),
-      ),
-      SizedBox(
-        width: 20,
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('MAGIG! - Rude(official video)'),
-        ],
-      ),
-      Spacer(),
-      Icon(Icons.arrow_downward),
-      Icon(Icons.more_vert),
-    ]),
+Widget itemaudio(BuildContext context, cancion canciones, int index) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ReproductorPage(
+                    canciones: [canciones],
+                    index: index - 1,
+                  )));
+    },
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      color: Colors.transparent,
+      height: 90,
+      child: Row(children: <Widget>[
+        Text(index.toString(), style: TextStyle(color: Colors.grey)),
+        SizedBox(
+          width: 20,
+        ),
+        Container(
+          height: 70,
+          width: 100,
+          child: Image.network(canciones.imagen),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(canciones.titulo),
+          ],
+        ),
+        Spacer(),
+        Icon(Icons.arrow_downward),
+        Icon(Icons.more_vert),
+      ]),
+    ),
   );
 }
