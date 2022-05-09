@@ -55,13 +55,8 @@ Widget imagenfondo(BuildContext context) {
   return Container(
       height: MediaQuery.of(context).size.height / 1.8,
       width: MediaQuery.of(context).size.width / 1,
-      child: Image.network(
-          "https://www.clipartkey.com/mpngs/m/276-2767912_music-maker-online-create-music-logo-png-hd.png"));
+      child: Image.asset('assets/fondo.png'));
 }
-
-// Image.network(
-//       "https://www.clipartkey.com/mpngs/m/276-2767912_music-maker-online-create-music-logo-png-hd.png",
-//     ),
 
 Widget customAppbar() {
   return Container(
@@ -152,3 +147,21 @@ Widget itemaudio(BuildContext context, cancion canciones, int index) {
     ),
   );
 }
+
+
+
+
+
+
+
+
+// Image.network(
+//       "https://www.clipartkey.com/mpngs/m/276-2767912_music-maker-online-create-music-logo-png-hd.png",
+//     ),
+
+
+
+
+
+
+
