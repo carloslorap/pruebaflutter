@@ -128,7 +128,7 @@ Widget itemaudio(BuildContext context, cancion canciones, int index) {
         Container(
           height: 70,
           width: 100,
-          child: Image.network(canciones.imagen),
+          child: Image.asset(canciones.imagen),
         ),
         SizedBox(
           width: 20,

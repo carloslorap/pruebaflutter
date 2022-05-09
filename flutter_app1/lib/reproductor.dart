@@ -113,7 +113,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
     );
   }
 
-  Widget portada(cancion cancion) {
+  Widget portada() {
     return Card(
       child: Container(
         height: 250,

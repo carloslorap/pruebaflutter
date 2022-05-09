@@ -8,27 +8,26 @@ class cancion {
 List<cancion> canciones = [
   cancion(
     titulo: 'MAGIG! - Rude(official video)',
-    imagen: 'https://i.ytimg.com/vi/PIh2xe4jnpk/maxresdefault.jpg',
+    imagen: 'assets/rude.jpg',
   ),
   cancion(
     titulo: 'Daddy Yankee - Con Calma )',
-    imagen: "https://i.ytimg.com/vi/DiItGE3eAyQ/maxresdefault.jpg",
+    imagen: "assets/daddy.jpg",
   ),
   cancion(
     titulo: 'Bruno Mars Thats What ILike ',
-    imagen:
-        "https://www.africandjspool.com/wp-content/uploads/2018/06/Bruno-Mars-%E2%80%93-That%E2%80%99s-What-I-Like-Instrumental.jpg",
+    imagen: "assets/bruno.jpg",
   ),
   cancion(
     titulo: "BoyWithUke'Toxic'Open Mic",
-    imagen: "https://i.ytimg.com/vi/yvzKKZp3usE/maxresdefault.jpg",
+    imagen: "assets/maxx.jpg",
   ),
   cancion(
     titulo: ' Ozuna - DEPRIMIDA ',
-    imagen: "https://entodomusiccom.files.wordpress.com/2022/02/unnamed-5.png",
+    imagen: "assets/ozuna.png",
   ),
   cancion(
     titulo: 'BAD BUNNY - AMORFODA ',
-    imagen: "https://i.ytimg.com/vi/kLpH1nSLJSs/maxresdefault.jpg",
+    imagen: "assets/badbunny.jpg",
   ),
 ];
