@@ -25,7 +25,13 @@ class _ReproductorPageState extends State<ReproductorPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          imagendefondo(),
+          Container(
+            child: PageView(
+              children: widget.canciones
+                  .map((canciones) => imagendefondo(canciones))
+                  .toList(),
+            ),
+          ),
           filtro(),
           Column(
             children: <Widget>[
@@ -34,7 +40,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
                 height: 40,
               ),
               Container(
-                height: 300,
+                height: 270,
                 child: PageView(
                   onPageChanged: (index) {
                     setState(() {
@@ -42,9 +48,9 @@ class _ReproductorPageState extends State<ReproductorPage> {
                     });
                   },
                   controller: PageController(viewportFraction: 0.8),
-                  children: <Widget>[
-                    portada(),
-                  ],
+                  children: widget.canciones
+                      .map((canciones) => portada(canciones))
+                      .toList(),
                 ),
               ),
               SizedBox(
@@ -63,12 +69,12 @@ class _ReproductorPageState extends State<ReproductorPage> {
     );
   }
 
-  Widget imagendefondo() {
+  Widget imagendefondo(cancion canciones) {
     return Container(
       decoration: BoxDecoration(
         color: Color(0xff1c1e2c),
         image: DecorationImage(
-            image: AssetImage('assets/rude.jpg'),
+            image: AssetImage(widget.canciones[0].imagen),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.6), BlendMode.dstATop)),
@@ -113,14 +119,14 @@ class _ReproductorPageState extends State<ReproductorPage> {
     );
   }
 
-  Widget portada() {
+  Widget portada(cancion canciones) {
     return Card(
       child: Container(
         height: 250,
         width: 350,
         child: Image.asset(
-          "assets/rude.jpg",
-          fit: BoxFit.cover,
+          canciones.imagen,
+          fit: BoxFit.fill,
         ),
       ),
     );
@@ -176,10 +182,20 @@ class _ReproductorPageState extends State<ReproductorPage> {
           SizedBox(
             width: 30,
           ),
-          Icon(
-            Icons.play_arrow,
+          IconButton(
+            onPressed: () {
+              final player = AudioCache();
+              player.play("rudede.mp3");
+            },
+            icon: Icon(Icons.play_arrow),
+            iconSize: 40,
             color: Colors.blue,
-            size: 50,
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.stop),
+            iconSize: 40,
+            color: Colors.blue,
           ),
           SizedBox(
             width: 30,
