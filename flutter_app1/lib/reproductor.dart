@@ -192,7 +192,10 @@ class _ReproductorPageState extends State<ReproductorPage> {
             color: Colors.blue,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              final stop = AudioPlayer();
+              stop.stop();
+            },
             icon: Icon(Icons.stop),
             iconSize: 40,
             color: Colors.blue,
