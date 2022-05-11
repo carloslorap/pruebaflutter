@@ -193,8 +193,8 @@ class _ReproductorPageState extends State<ReproductorPage> {
           ),
           IconButton(
             onPressed: () {
-              final stop = AudioPlayer();
-              stop.stop();
+              final parar = AudioPlayer();
+              parar.stop();
             },
             icon: Icon(Icons.stop),
             iconSize: 40,
