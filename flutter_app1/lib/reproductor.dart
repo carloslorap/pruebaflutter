@@ -19,7 +19,7 @@ class ReproductorPage extends StatefulWidget {
 
 class _ReproductorPageState extends State<ReproductorPage> {
   double _valorbarra = 0;
-  int indicedisco = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +42,6 @@ class _ReproductorPageState extends State<ReproductorPage> {
               Container(
                 height: 270,
                 child: PageView(
-                  onPageChanged: (index) {
-                    setState(() {
-                      indicedisco = index;
-                    });
-                  },
                   controller: PageController(viewportFraction: 0.8),
                   children: widget.canciones
                       .map((canciones) => portada(canciones))
@@ -123,7 +118,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
     return Card(
       child: Container(
         height: 250,
-        width: 350,
+        width: 300,
         child: Image.asset(
           canciones.imagen,
           fit: BoxFit.fill,
@@ -183,19 +178,13 @@ class _ReproductorPageState extends State<ReproductorPage> {
             width: 30,
           ),
           IconButton(
-            onPressed: () {
-              final player = AudioCache();
-              player.play('assets/rudede.mp3');
-            },
+            onPressed: () {},
             icon: Icon(Icons.play_arrow),
             iconSize: 40,
             color: Colors.blue,
           ),
           IconButton(
-            onPressed: () {
-              final parar = AudioPlayer();
-              parar.stop();
-            },
+            onPressed: () {},
             icon: Icon(Icons.stop),
             iconSize: 40,
             color: Colors.blue,

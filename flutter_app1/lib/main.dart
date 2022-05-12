@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/cancionesmodell.dart';
+import 'package:flutter_app1/login.dart';
 import 'package:flutter_app1/reproductor.dart';
 
 void main() => runApp(const MyApp());
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'music',
       home: Scaffold(
         appBar: AppBar(title: const Text('MUSIC PLAY')),
@@ -28,9 +30,10 @@ class MyStatelessWidget extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: <Widget>[
+          login(context),
           Stack(children: <Widget>[
             imagenfondo(context),
-            customAppbar(),
+            customAppbar(context),
             subtitulo(context),
           ]),
 
@@ -58,11 +61,29 @@ Widget imagenfondo(BuildContext context) {
       child: Image.asset('assets/fondo.png'));
 }
 
-Widget customAppbar() {
+Widget login(BuildContext context) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => loginpage()),
+      );
+    },
+    child: Container(
+      height: 40,
+      child: Column(children: <Widget>[
+        Text("login",
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30))
+      ]),
+    ),
+  );
+}
+
+Widget customAppbar(BuildContext context) {
   return Container(
     height: 70,
     padding: EdgeInsets.all(13),
-    color: Colors.transparent,
     child: Row(
       children: <Widget>[
         Icon(
@@ -80,7 +101,7 @@ Widget customAppbar() {
         Icon(
           Icons.more_vert,
           color: Colors.black,
-        )
+        ),
       ],
     ),
   );
@@ -147,6 +168,32 @@ Widget itemaudio(BuildContext context, cancion canciones, int index) {
     ),
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
