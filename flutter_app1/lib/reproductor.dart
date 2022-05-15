@@ -178,7 +178,10 @@ class _ReproductorPageState extends State<ReproductorPage> {
             width: 30,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              final player = AudioCache();
+              player.play("rudede.mp3");
+            },
             icon: Icon(Icons.play_arrow),
             iconSize: 40,
             color: Colors.blue,
