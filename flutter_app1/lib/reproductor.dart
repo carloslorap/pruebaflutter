@@ -56,7 +56,13 @@ class _ReproductorPageState extends State<ReproductorPage> {
               SizedBox(
                 height: 20,
               ),
-              botones(),
+              Container(
+                child: PageView(
+                  children: widget.canciones
+                      .map((canciones) => botones(canciones))
+                      .toList(),
+                ),
+              ),
             ],
           ),
         ],
@@ -163,7 +169,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
     });
   }
 
-  Widget botones() {
+  Widget botones(cancion canciones) {
     return Container(
       height: 50,
       child: Row(
@@ -180,7 +186,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
           IconButton(
             onPressed: () {
               final player = AudioCache();
-              player.play("rudede.mp3");
+              player.play(widget.canciones[0].audio);
             },
             icon: Icon(Icons.play_arrow),
             iconSize: 40,
