@@ -1,5 +1,9 @@
+import 'dart:ffi';
+
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/cancionesmodell.dart';
 
@@ -18,7 +22,48 @@ class ReproductorPage extends StatefulWidget {
 }
 
 class _ReproductorPageState extends State<ReproductorPage> {
-  double _valorbarra = 0;
+  final audioPlayer = AudioPlayer();
+  bool isplaying = false;
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+
+  @override
+  void initState() {
+    super.initState();
+
+    setAudio();
+
+    audioPlayer.onPlayerStateChanged.listen((State) {
+      setState(() {
+        isplaying = State == PlayerState.PLAYING;
+      });
+    });
+
+    audioPlayer.onDurationChanged.listen((newDuration) {
+      setState(() {
+        duration = newDuration;
+      });
+    });
+
+    audioPlayer.onAudioPositionChanged.listen((newPosition) {
+      setState(() {
+        position = newPosition;
+      });
+    });
+  }
+
+  Future setAudio() async {
+    audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+    final player = AudioCache(prefix: 'assets/');
+    final url = await player.load(widget.canciones[0].audio);
+    audioPlayer.setUrl(url.path, isLocal: true);
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +102,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
                 height: 20,
               ),
               Container(
+                height: 55,
                 child: PageView(
                   children: widget.canciones
                       .map((canciones) => botones(canciones))
@@ -153,20 +199,20 @@ class _ReproductorPageState extends State<ReproductorPage> {
       child: Column(
         children: <Widget>[
           Slider(
-            value: _valorbarra,
+            min: 0,
+            max: duration.inSeconds.toDouble(),
+            value: position.inSeconds.toDouble(),
             activeColor: Colors.blue,
             inactiveColor: Colors.grey,
-            onChanged: onChanged,
-          )
+            onChanged: (value) async {
+              final position = Duration(seconds: value.toInt());
+              await audioPlayer.seek(position);
+              await audioPlayer.resume();
+            },
+          ),
         ],
       ),
     );
-  }
-
-  onChanged(double value) {
-    setState(() {
-      _valorbarra = value;
-    });
   }
 
   Widget botones(cancion canciones) {
@@ -184,19 +230,18 @@ class _ReproductorPageState extends State<ReproductorPage> {
             width: 30,
           ),
           IconButton(
-            onPressed: () {
-              final player = AudioCache();
-              player.play(widget.canciones[0].audio);
+            icon: Icon(
+              isplaying ? Icons.pause : Icons.play_arrow,
+            ),
+            color: Colors.blue,
+            iconSize: 50,
+            onPressed: () async {
+              if (isplaying) {
+                await audioPlayer.pause();
+              } else {
+                await audioPlayer.resume();
+              }
             },
-            icon: Icon(Icons.play_arrow),
-            iconSize: 40,
-            color: Colors.blue,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.stop),
-            iconSize: 40,
-            color: Colors.blue,
           ),
           SizedBox(
             width: 30,
@@ -211,3 +256,17 @@ class _ReproductorPageState extends State<ReproductorPage> {
     );
   }
 }
+
+
+
+
+
+
+
+// onPressed: () {
+//               final player = AudioCache();
+//               player.play(widget.canciones[0].audio);
+//             },
+//             icon: Icon(Icons.play_arrow),
+//             iconSize: 40,
+//             color: Colors.blue,
