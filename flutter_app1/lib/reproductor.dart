@@ -194,6 +194,19 @@ class _ReproductorPageState extends State<ReproductorPage> {
     );
   }
 
+  String formatTime(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    final hours = twoDigits(duration.inHours);
+    final minute = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+
+    return [
+      if (duration.inHours > 0) hours,
+      minute,
+      seconds,
+    ].join(':');
+  }
+
   Widget BARRAmusic() {
     return Container(
       child: Column(
@@ -210,6 +223,22 @@ class _ReproductorPageState extends State<ReproductorPage> {
               await audioPlayer.resume();
             },
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  formatTime(position),
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  formatTime(duration - position),
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -256,6 +285,24 @@ class _ReproductorPageState extends State<ReproductorPage> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
