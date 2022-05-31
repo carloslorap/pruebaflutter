@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/cancionesmodell.dart';
 import 'package:flutter_app1/reproductor.dart';
+import 'package:flutter_app1/widgets/widgets_menu.dart';
 
 class principals extends StatefulWidget {
   const principals({Key? key}) : super(key: key);
@@ -13,11 +14,12 @@ class _principalsState extends State<principals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+      drawer: MenuLateral(),
       body: Column(
         children: <Widget>[
           Stack(children: <Widget>[
             imagenfondo(context),
-            customAppbar(context),
             subtitulo(context),
           ]),
           Expanded(
@@ -41,33 +43,6 @@ Widget imagenfondo(BuildContext context) {
       height: MediaQuery.of(context).size.height / 1.8,
       width: MediaQuery.of(context).size.width / 1,
       child: Image.asset('assets/fondo.png'));
-}
-
-Widget customAppbar(BuildContext context) {
-  return Container(
-    height: 70,
-    padding: EdgeInsets.all(13),
-    child: Row(
-      children: <Widget>[
-        Icon(
-          Icons.menu,
-          color: Colors.black,
-        ),
-        Spacer(),
-        Icon(
-          Icons.search,
-          color: Colors.black,
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        Icon(
-          Icons.more_vert,
-          color: Colors.black,
-        ),
-      ],
-    ),
-  );
 }
 
 Widget subtitulo(BuildContext context) {
