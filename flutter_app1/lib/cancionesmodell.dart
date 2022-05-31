@@ -51,4 +51,9 @@ List<cancion> canciones = [
     imagen: "assets/seguro.jpg",
     audio: 'segur.mp3',
   ),
+  cancion(
+    titulo: 'Bad Bunny - Aguacero ',
+    imagen: "assets/agua.jpg",
+    audio: 'aguacero.mp3',
+  ),
 ];
