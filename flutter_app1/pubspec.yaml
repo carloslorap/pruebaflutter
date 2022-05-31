@@ -38,6 +38,8 @@ dependencies:
   faker: ^2.0.0
   audioplayers: ^0.20.1
   file_picker: ^4.5.1
+  firebase_core: ^1.17.1
+  firebase_auth: ^3.3.19
 
 
 dev_dependencies:

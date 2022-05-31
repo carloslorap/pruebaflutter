@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/cancionesmodell.dart';
 import 'package:flutter_app1/reproductor.dart';
-import 'package:flutter_app1/login.dart';
 
 class principals extends StatefulWidget {
   const principals({Key? key}) : super(key: key);
