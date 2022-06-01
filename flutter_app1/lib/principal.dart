@@ -50,7 +50,7 @@ Widget subtitulo(BuildContext context) {
       top: MediaQuery.of(context).size.height / 2.2,
       child: Container(
           child: Column(
-        children: <Widget>[
+        children: const <Widget>[
           Text('music play',
               style: TextStyle(
                   color: Colors.black,

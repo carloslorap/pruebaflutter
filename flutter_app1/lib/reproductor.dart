@@ -81,7 +81,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
           Column(
             children: <Widget>[
               appbar(),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Container(
@@ -93,12 +93,12 @@ class _ReproductorPageState extends State<ReproductorPage> {
                       .toList(),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               subtitulo(),
               BARRAmusic(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -147,7 +147,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Text(
                       "MUSIC PLAY",
                       style: TextStyle(color: Colors.white, fontSize: 22),
@@ -186,7 +186,7 @@ class _ReproductorPageState extends State<ReproductorPage> {
         children: <Widget>[
           Text(
             widget.canciones[0].titulo,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ],
@@ -250,12 +250,12 @@ class _ReproductorPageState extends State<ReproductorPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Icon(
+          const Icon(
             Icons.fast_rewind,
             color: Colors.grey,
             size: 40,
           ),
-          SizedBox(
+          const SizedBox(
             width: 30,
           ),
           IconButton(
@@ -272,10 +272,10 @@ class _ReproductorPageState extends State<ReproductorPage> {
               }
             },
           ),
-          SizedBox(
+          const SizedBox(
             width: 30,
           ),
-          Icon(
+          const Icon(
             Icons.fast_forward,
             color: Colors.grey,
             size: 40,
